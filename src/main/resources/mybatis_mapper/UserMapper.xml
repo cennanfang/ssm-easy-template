@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.ichenkaihua.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.github.ichenkaihua.model.User">
+<mapper namespace="com.buliyiren.wehelp.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.buliyiren.wehelp.model.User">
     <!--
-      WARNING - @mbggenerated
+      WARNING - @mbg.generated
     -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="CHAR" property="name" />
-    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="locked" jdbcType="CHAR" property="locked" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="register_date" jdbcType="TIMESTAMP" property="registerDate" />
   </resultMap>
 </mapper>

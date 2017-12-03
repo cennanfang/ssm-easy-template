@@ -18,18 +18,18 @@
 	<mvc:annotation-driven  >
 	
 	  <mvc:argument-resolvers>
-            <bean class="com.github.ichenkaihua.bind.CurrentUserMethodArgumentResolver"/>
-		  <bean class="com.github.ichenkaihua.bind.RequestPageInfoMethodArgumentResolver" />
+            <bean class="com.buliyiren.wehelp.bind.CurrentUserMethodArgumentResolver"/>
+		  <bean class="com.buliyiren.wehelp.bind.RequestPageInfoMethodArgumentResolver" />
         </mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
 
 
-	<bean class="com.github.ichenkaihua.document.MySwaggerConfig"/>
+	<bean class="com.buliyiren.wehelp.document.MySwaggerConfig"/>
 
 
 	<!-- 只扫描@controller注解 -->
-    <context:component-scan base-package="com.github.ichenkaihua.controller">
+    <context:component-scan base-package="com.buliyiren.wehelp.controller">
         <context:include-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller" />
         <context:include-filter type="annotation"

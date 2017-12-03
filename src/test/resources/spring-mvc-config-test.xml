@@ -18,8 +18,8 @@
 	<mvc:annotation-driven  >
 	
 	  <mvc:argument-resolvers>
-            <bean class="com.github.ichenkaihua.bind.CurrentUserMethodArgumentResolver"/>
-		  <bean class="com.github.ichenkaihua.bind.RequestPageInfoMethodArgumentResolver" />
+            <bean class="com.buliyiren.wehelp.bind.CurrentUserMethodArgumentResolver"/>
+		  <bean class="com.buliyiren.wehelp.bind.RequestPageInfoMethodArgumentResolver" />
         </mvc:argument-resolvers>
 	</mvc:annotation-driven>
 	<mvc:annotation-driven  />

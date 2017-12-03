@@ -58,7 +58,7 @@
 
 	<filter>
 		<filter-name>requestLogFilter</filter-name>
-		<filter-class>com.github.ichenkaihua.filter.RequestLogFilter</filter-class>
+		<filter-class>com.buliyiren.wehelp.filter.RequestLogFilter</filter-class>
 		<async-supported>true</async-supported>
 	</filter>
 	<filter-mapping>

@@ -16,7 +16,7 @@
 
 
 	<!-- Realm实现 -->
-	<bean id="statelessRealm" class="com.github.ichenkaihua.secure.realm.StatelessRealm">
+	<bean id="statelessRealm" class="com.buliyiren.wehelp.secure.realm.StatelessRealm">
 		<property name="cachingEnabled" value="false" />
 	</bean>
 
@@ -46,7 +46,7 @@
 
 	<!-- restNossion过滤器 -->
 	<bean id="restNosession"
-		class="com.github.ichenkaihua.secure.filter.NoSesstionHttpMethodPermissionFilter" />
+		class="com.buliyiren.wehelp.secure.filter.NoSesstionHttpMethodPermissionFilter" />
 
 	<!-- Shiro的Web过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
