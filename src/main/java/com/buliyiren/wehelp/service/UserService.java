@@ -1,12 +1,14 @@
 package com.buliyiren.wehelp.service;
 
-import com.buliyiren.wehelp.mapper.UserMapper;
+import com.buliyiren.wehelp.mapper.UserFunMapper;
 import com.buliyiren.wehelp.model.User;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chenkaihua on 15-9-15.
@@ -15,25 +17,24 @@ import java.util.List;
 public class UserService  {
 
     @Autowired
-    UserMapper userMapper;
+    UserFunMapper userMapper;
 
 
 
     @RequiresRoles("admin")
     public void deleteWithAdminRoleById(int id){
-        userMapper.deleteByPrimaryKey(id);
+        userMapper.delete(id);
     }
 
 
     public User getUserById(int id){
-        return userMapper.selectByPrimaryKey(id);
+        return userMapper.select(id);
     }
 
 
 
     public boolean isExist(User user){
-        System.out.println(user.toString());
-        return  userMapper.selectCount(user)>0;
+        return  true;
     }
 
 
@@ -43,21 +44,18 @@ public class UserService  {
 
 
     public List<User> getUsers(User user){
-        if (user == null) {
-            return userMapper.selectAll();
-        }
 
-        return userMapper.select(user);
+        return userMapper.selectParam(null);
     }
 
 
     public void deleteById(int id){
-        userMapper.deleteByPrimaryKey(id);
+        userMapper.delete(id);
 
     }
 
     public void update(User user){
-        userMapper.updateByPrimaryKey(user);
+        userMapper.update(user);
     }
 
 

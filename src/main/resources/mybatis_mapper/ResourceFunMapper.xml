@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.buliyiren.wehelp.mapper.ResourceFunMapper">
+
+	<!-- 结果集 -->
+	<resultMap id="resourceResult" type="com.buliyiren.wehelp.model.Resource">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="type" column="type" />
+		<result property="url" column="url" />
+		<result property="parentId" column="parent_id" />
+		<result property="permission" column="permission" />
+		<result property="available" column="available" />
+	</resultMap>
+
+	<select id="select" parameterType="Integer" resultMap="resourceResult">
+		select * from t_resource where id=#{id}
+	</select>
+
+ 	<select id="selectParam" parameterType="java.util.Map" resultMap="resourceResult">
+		select * from t_resource
+		<include refid="paramWhereCondition"/>
+		<if test="orderColumn != null">
+ 			order by ${orderColumn}
+ 			<if test="orderTurn != null">
+ 				${orderTurn}
+ 			</if>
+ 		</if>
+ 	</select> 
+
+	<insert id="insert" parameterType="com.buliyiren.wehelp.model.Resource">
+		insert into t_resource(name, type, url, parent_id, permission, available)
+			values(#{name}, #{type}, #{url}, #{parentId}, #{permission}, #{available})
+	</insert>
+
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into t_resource(name, type, url, parent_id, permission, available) values
+		<foreach item="resource" collection="list" separator=", ">
+			(#{resource.name}, #{resource.type}, #{resource.url}, #{resource.parentId}, #{resource.permission}, #{resource.available})
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="com.buliyiren.wehelp.model.Resource">
+		update t_resource
+		<trim suffixOverrides=",">
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="type != null">type=#{type},</if>
+			<if test="url != null">url=#{url},</if>
+			<if test="parentId != null">parent_id=#{parentId},</if>
+			<if test="permission != null">permission=#{permission},</if>
+			<if test="available != null">available=#{available},</if>
+		</set>
+		</trim>
+		where id=#{id}
+	</update>
+
+	<update id="updateBatch" parameterType="java.util.List">
+		<foreach collection="list" item="resource" separator=";">
+		update t_resource
+		<trim suffixOverrides=",">
+		<set>
+			<if test="resource.name != null">name=#{resource.name},</if>
+			<if test="resource.type != null">type=#{resource.type},</if>
+			<if test="resource.url != null">url=#{resource.url},</if>
+			<if test="resource.parentId != null">parent_id=#{resource.parentId},</if>
+			<if test="resource.permission != null">permission=#{resource.permission},</if>
+			<if test="resource.available != null">available=#{resource.available},</if>
+		</set>
+		</trim>
+		where id=#{resource.id}
+		</foreach>
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		delete from t_resource where id=#{id}
+	</delete>
+
+	<delete id="deleteParam" parameterType="java.util.Map">
+		delete from t_resource
+		<include refid="paramWhereCondition"/>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="java.util.List">
+		delete from t_resource where id in 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<foreach collection="list" item="pk" separator=","> 
+ 				#{pk}
+			</foreach>
+		</trim>
+	</delete>
+
+	<select id="count" resultType="int">
+		select count(*) from t_resource
+	</select>
+
+	<select id="countParam" parameterType="java.util.Map" resultType="int">
+		select count(*) from t_resource
+		<include refid="paramWhereCondition"/>
+	</select>
+
+	<sql id="paramWhereCondition">
+		<trim prefixOverrides="and">
+		<where>	
+			<choose>
+			<when test="stringUseLike != null and stringUseLike == 1">
+				<if test="id != null">and id=#{id}</if>
+				<if test="name != null">and name like #{name}</if>
+				<if test="type != null">and type like #{type}</if>
+				<if test="url != null">and url like #{url}</if>
+				<if test="parentId != null">and parent_id=#{parentId}</if>
+				<if test="permission != null">and permission like #{permission}</if>
+				<if test="available != null">and available=#{available}</if>
+			</when>
+			<otherwise>
+				<if test="id != null">and id=#{id}</if>
+				<if test="name != null">and name=#{name}</if>
+				<if test="type != null">and type=#{type}</if>
+				<if test="url != null">and url=#{url}</if>
+				<if test="parentId != null">and parent_id=#{parentId}</if>
+				<if test="permission != null">and permission=#{permission}</if>
+				<if test="available != null">and available=#{available}</if>
+			</otherwise>
+			</choose>
+			<if test="betweenAndColumn != null">
+ 				 and ${betweenAndColumn} between ${betweenStart} and ${betweenEnd}
+ 			</if>
+ 		</where>
+		</trim>
+	</sql>
+
+</mapper>

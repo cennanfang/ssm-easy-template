@@ -1,287 +1,182 @@
 package com.buliyiren.wehelp.model;
 
 import java.util.Date;
-import javax.persistence.*;
+import javax.persistence.Table; 
 
+/**
+* User 实体类
+* Sun Dec 10 21:42:31 CST 2017 cennanfang
+*/ 
 @Table(name = "t_user")
-public class User {
-    /**
-     * 唯一标识
-     */
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class User extends BaseModel {
 
-    /**
-     * 用户名（用户账号）唯一
-     */
-    @Column(name = "user_name")
-    private String userName;
+	/**
+	* 
+	*/ 
+	private Integer id;
 
-    /**
-     * 账号密码
-     */
-    private String password;
+	/**
+	* 
+	*/ 
+	private Integer organizationId;
 
-    /**
-     * 盐
-     */
-    private String salt;
+	/**
+	* 用户账号
+	*/ 
+	private String userName;
 
-    /**
-     * 是否锁定0否，1是
-     */
-    private String locked;
+	/**
+	* 用户昵称
+	*/ 
+	private String nickName;
 
-    /**
-     * 用户昵称
-     */
-    @Column(name = "nick_name")
-    private String nickName;
+	/**
+	* 
+	*/ 
+	private String password;
 
-    /**
-     * 性别 男：0 女：1
-     */
-    private String sex;
+	/**
+	* 
+	*/ 
+	private String salt;
 
-    /**
-     * 年龄
-     */
-    private Integer age;
+	/**
+	* 
+	*/ 
+	private Boolean locked;
 
-    /**
-     * 电话号码
-     */
-    private String phone;
+	/**
+	* 性别
+	*/ 
+	private String gender;
 
-    /**
-     * 邮箱
-     */
-    private String email;
+	/**
+	* 出生年月
+	*/ 
+	private Date birthdate;
 
-    /**
-     * 地址
-     */
-    private String address;
+	/**
+	* 电话号码
+	*/ 
+	private String phone;
 
-    /**
-     * 注册日期
-     */
-    @Column(name = "register_date")
-    private Date registerDate;
+	/**
+	* 邮箱
+	*/ 
+	private String email;
 
-    /**
-     * 获取唯一标识
-     *
-     * @return id - 唯一标识
-     */
-    public Integer getId() {
-        return id;
-    }
+	/**
+	* 地址
+	*/ 
+	private String address;
 
-    /**
-     * 设置唯一标识
-     *
-     * @param id 唯一标识
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	/**
+	* 注册日期
+	*/ 
+	private Date registerDate;
 
-    /**
-     * 获取用户名（用户账号）唯一
-     *
-     * @return user_name - 用户名（用户账号）唯一
-     */
-    public String getUserName() {
-        return userName;
-    }
+	public void setId(Integer id){
+		this.id = id;
+	}
 
-    /**
-     * 设置用户名（用户账号）唯一
-     *
-     * @param userName 用户名（用户账号）唯一
-     */
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public Integer getId(){
+		return id;
+	}
 
-    /**
-     * 获取账号密码
-     *
-     * @return password - 账号密码
-     */
-    public String getPassword() {
-        return password;
-    }
+	public void setOrganizationId(Integer organizationId){
+		this.organizationId = organizationId;
+	}
 
-    /**
-     * 设置账号密码
-     *
-     * @param password 账号密码
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public Integer getOrganizationId(){
+		return organizationId;
+	}
 
-    /**
-     * 获取盐
-     *
-     * @return salt - 盐
-     */
-    public String getSalt() {
-        return salt;
-    }
+	public void setUserName(String userName){
+		this.userName = userName;
+	}
 
-    /**
-     * 设置盐
-     *
-     * @param salt 盐
-     */
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
+	public String getUserName(){
+		return userName;
+	}
 
-    /**
-     * 获取是否锁定0否，1是
-     *
-     * @return locked - 是否锁定0否，1是
-     */
-    public String getLocked() {
-        return locked;
-    }
+	public void setNickName(String nickName){
+		this.nickName = nickName;
+	}
 
-    /**
-     * 设置是否锁定0否，1是
-     *
-     * @param locked 是否锁定0否，1是
-     */
-    public void setLocked(String locked) {
-        this.locked = locked;
-    }
+	public String getNickName(){
+		return nickName;
+	}
 
-    /**
-     * 获取用户昵称
-     *
-     * @return nick_name - 用户昵称
-     */
-    public String getNickName() {
-        return nickName;
-    }
+	public void setPassword(String password){
+		this.password = password;
+	}
 
-    /**
-     * 设置用户昵称
-     *
-     * @param nickName 用户昵称
-     */
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
+	public String getPassword(){
+		return password;
+	}
 
-    /**
-     * 获取性别 男：0 女：1
-     *
-     * @return sex - 性别 男：0 女：1
-     */
-    public String getSex() {
-        return sex;
-    }
+	public void setSalt(String salt){
+		this.salt = salt;
+	}
 
-    /**
-     * 设置性别 男：0 女：1
-     *
-     * @param sex 性别 男：0 女：1
-     */
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+	public String getSalt(){
+		return salt;
+	}
 
-    /**
-     * 获取年龄
-     *
-     * @return age - 年龄
-     */
-    public Integer getAge() {
-        return age;
-    }
+	public void setLocked(Boolean locked){
+		this.locked = locked;
+	}
 
-    /**
-     * 设置年龄
-     *
-     * @param age 年龄
-     */
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public Boolean getLocked(){
+		return locked;
+	}
 
-    /**
-     * 获取电话号码
-     *
-     * @return phone - 电话号码
-     */
-    public String getPhone() {
-        return phone;
-    }
+	public void setGender(String gender){
+		this.gender = gender;
+	}
 
-    /**
-     * 设置电话号码
-     *
-     * @param phone 电话号码
-     */
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public String getGender(){
+		return gender;
+	}
 
-    /**
-     * 获取邮箱
-     *
-     * @return email - 邮箱
-     */
-    public String getEmail() {
-        return email;
-    }
+	public void setBirthdate(Date birthdate){
+		this.birthdate = birthdate;
+	}
 
-    /**
-     * 设置邮箱
-     *
-     * @param email 邮箱
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public Date getBirthdate(){
+		return birthdate;
+	}
 
-    /**
-     * 获取地址
-     *
-     * @return address - 地址
-     */
-    public String getAddress() {
-        return address;
-    }
+	public void setPhone(String phone){
+		this.phone = phone;
+	}
 
-    /**
-     * 设置地址
-     *
-     * @param address 地址
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public String getPhone(){
+		return phone;
+	}
 
-    /**
-     * 获取注册日期
-     *
-     * @return register_date - 注册日期
-     */
-    public Date getRegisterDate() {
-        return registerDate;
-    }
+	public void setEmail(String email){
+		this.email = email;
+	}
 
-    /**
-     * 设置注册日期
-     *
-     * @param registerDate 注册日期
-     */
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
+	public String getEmail(){
+		return email;
+	}
+
+	public void setAddress(String address){
+		this.address = address;
+	}
+
+	public String getAddress(){
+		return address;
+	}
+
+	public void setRegisterDate(Date registerDate){
+		this.registerDate = registerDate;
+	}
+
+	public Date getRegisterDate(){
+		return registerDate;
+	}
 }
+

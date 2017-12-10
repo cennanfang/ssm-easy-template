@@ -11,11 +11,11 @@ drop table if exists t_role_resource;
 drop table if exists t_user_role;
 
 create table t_resource (
-  id bigint auto_increment,
+  id int(11) auto_increment,
   name varchar(100),
   type varchar(50),
   url varchar(200),
-  parent_id bigint,
+  parent_id int(11),
   permission varchar(100),
   available bool default false,
   constraint pk_t_resource primary key(id)
@@ -23,7 +23,7 @@ create table t_resource (
 create index idx_t_resource_parent_id on t_resource(parent_id);
 
 create table t_role (
-  id bigint auto_increment,
+  id int(11) auto_increment,
   name varchar(100),
   description varchar(100),
   available bool default false,
@@ -31,31 +31,33 @@ create table t_role (
 ) charset=utf8 ENGINE=InnoDB;
 
 create table t_role_resource(
-  role_id bigint,
-  resource_id bigint,
+  id int(11) auto_increment,
+  role_id int(11),
+  resource_id int(11),
   foreign key(role_id) references t_role(id),
-  foreign key(resource_id) references t_resource(id)
+  foreign key(resource_id) references t_resource(id),
+  constraint pk_t_resource primary key(id)
 )charset=utf8 ENGINE=InnoDB;
 
 create table t_organization (
-  id bigint auto_increment,
+  id int(11) auto_increment,
   name varchar(100),
-  parent_id bigint,
+  parent_id int(11),
   available bool default false,
   constraint pk_t_organization primary key(id)
 ) charset=utf8 ENGINE=InnoDB;
 create index idx_t_organization_parent_id on t_organization(parent_id);
 
 create table t_user (
-  id bigint auto_increment,
-  organization_id bigint,
+  id int(11) auto_increment,
+  organization_id int(11),
   user_name varchar(100) COMMENT '用户账号',
   nick_name varchar(255) COMMENT '用户昵称',
   password varchar(100),
   salt varchar(100),
   locked bool default false,
-  sex varchar(10),
-  birth_date  TIMESTAMP COMMENT '出生年月',
+  gender varchar(5) COMMENT '性别',
+  birthdate  TIMESTAMP COMMENT '出生年月',
   phone varchar(15) COMMENT '电话号码',
   email  varchar(255) COMMENT '邮箱',
   address  varchar(255) COMMENT '地址',
@@ -67,10 +69,12 @@ create unique index idx_t_user_username on t_user(username);
 create index idx_t_user_organization_id on t_user(organization_id);
 
 create table t_user_role (
-  user_id bigint,
-  role_id bigint,
+  id int(11) auto_increment,
+  user_id int(11),
+  role_id int(11),
   foreign key(role_id) references t_role(id),
-  foreign key(user_id) references t_user(id)
+  foreign key(user_id) references t_user(id),
+  constraint pk_t_user primary key(id)
 ) charset=utf8 ENGINE=InnoDB;
 
 ##信息类型表
@@ -95,8 +99,8 @@ CREATE TABLE t_message_state (
 
 DROP TABLE IF EXISTS t_message;
 CREATE TABLE t_message (
-  id bigint NOT NULL AUTO_INCREMENT COMMENT '唯一标识且自增',
-  user_id bigint NOT NULL COMMENT '消息创建者',
+  id int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识且自增',
+  user_id int(11) NOT NULL COMMENT '消息创建者',
   type_id int(6) NOT NULL COMMENT '消息状态',
   state_id int(6) NOT NULL COMMENT '消息类型',
   content varchar(1200) NOT NULL COMMENT '消息内容',

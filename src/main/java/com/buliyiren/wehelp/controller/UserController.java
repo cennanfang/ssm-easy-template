@@ -2,8 +2,8 @@ package com.buliyiren.wehelp.controller;
 
 
 import com.buliyiren.wehelp.jopo.ErrorResponseEntity;
-import com.buliyiren.wehelp.utils.URIUtils;
 import com.buliyiren.wehelp.model.User;
+import com.buliyiren.wehelp.utils.URIUtils;
 import com.buliyiren.wehelp.service.UserService;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;

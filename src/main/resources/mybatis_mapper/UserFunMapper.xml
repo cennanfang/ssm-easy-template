@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.buliyiren.wehelp.mapper.UserFunMapper">
+
+	<!-- 结果集 -->
+	<resultMap id="userResult" type="com.buliyiren.wehelp.model.User">
+		<id property="id" column="id" />
+		<result property="organizationId" column="organization_id" />
+		<result property="userName" column="user_name" />
+		<result property="nickName" column="nick_name" />
+		<result property="password" column="password" />
+		<result property="salt" column="salt" />
+		<result property="locked" column="locked" />
+		<result property="gender" column="gender" />
+		<result property="birthdate" column="birthdate" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+		<result property="address" column="address" />
+		<result property="registerDate" column="register_date" />
+	</resultMap>
+
+	<select id="select" parameterType="Integer" resultMap="userResult">
+		select * from t_user where id=#{id}
+	</select>
+
+ 	<select id="selectParam" parameterType="java.util.Map" resultMap="userResult">
+		select * from t_user
+		<include refid="paramWhereCondition"/>
+		<if test="orderColumn != null">
+ 			order by ${orderColumn}
+ 			<if test="orderTurn != null">
+ 				${orderTurn}
+ 			</if>
+ 		</if>
+ 	</select> 
+
+	<insert id="insert" parameterType="com.buliyiren.wehelp.model.User">
+		insert into t_user(organization_id, user_name, nick_name, password, salt, locked, gender, birthdate, phone, email, address, register_date)
+			values(#{organizationId}, #{userName}, #{nickName}, #{password}, #{salt}, #{locked}, #{gender}, #{birthdate}, #{phone}, #{email}, #{address}, #{registerDate})
+	</insert>
+
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into t_user(organization_id, user_name, nick_name, password, salt, locked, gender, birthdate, phone, email, address, register_date) values
+		<foreach item="user" collection="list" separator=", ">
+			(#{user.organizationId}, #{user.userName}, #{user.nickName}, #{user.password}, #{user.salt}, #{user.locked}, #{user.gender}, #{user.birthdate}, #{user.phone}, #{user.email}, #{user.address}, #{user.registerDate})
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="com.buliyiren.wehelp.model.User">
+		update t_user
+		<trim suffixOverrides=",">
+		<set>
+			<if test="organizationId != null">organization_id=#{organizationId},</if>
+			<if test="userName != null">user_name=#{userName},</if>
+			<if test="nickName != null">nick_name=#{nickName},</if>
+			<if test="password != null">password=#{password},</if>
+			<if test="salt != null">salt=#{salt},</if>
+			<if test="locked != null">locked=#{locked},</if>
+			<if test="gender != null">gender=#{gender},</if>
+			<if test="birthdate != null">birthdate=#{birthdate},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="email != null">email=#{email},</if>
+			<if test="address != null">address=#{address},</if>
+			<if test="registerDate != null">register_date=#{registerDate},</if>
+		</set>
+		</trim>
+		where id=#{id}
+	</update>
+
+	<update id="updateBatch" parameterType="java.util.List">
+		<foreach collection="list" item="user" separator=";">
+		update t_user
+		<trim suffixOverrides=",">
+		<set>
+			<if test="user.organizationId != null">organization_id=#{user.organizationId},</if>
+			<if test="user.userName != null">user_name=#{user.userName},</if>
+			<if test="user.nickName != null">nick_name=#{user.nickName},</if>
+			<if test="user.password != null">password=#{user.password},</if>
+			<if test="user.salt != null">salt=#{user.salt},</if>
+			<if test="user.locked != null">locked=#{user.locked},</if>
+			<if test="user.gender != null">gender=#{user.gender},</if>
+			<if test="user.birthdate != null">birthdate=#{user.birthdate},</if>
+			<if test="user.phone != null">phone=#{user.phone},</if>
+			<if test="user.email != null">email=#{user.email},</if>
+			<if test="user.address != null">address=#{user.address},</if>
+			<if test="user.registerDate != null">register_date=#{user.registerDate},</if>
+		</set>
+		</trim>
+		where id=#{user.id}
+		</foreach>
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		delete from t_user where id=#{id}
+	</delete>
+
+	<delete id="deleteParam" parameterType="java.util.Map">
+		delete from t_user
+		<include refid="paramWhereCondition"/>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="java.util.List">
+		delete from t_user where id in 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<foreach collection="list" item="pk" separator=","> 
+ 				#{pk}
+			</foreach>
+		</trim>
+	</delete>
+
+	<select id="count" resultType="int">
+		select count(*) from t_user
+	</select>
+
+	<select id="countParam" parameterType="java.util.Map" resultType="int">
+		select count(*) from t_user
+		<include refid="paramWhereCondition"/>
+	</select>
+
+	<sql id="paramWhereCondition">
+		<trim prefixOverrides="and">
+		<where>	
+			<choose>
+			<when test="stringUseLike != null and stringUseLike == 1">
+				<if test="id != null">and id=#{id}</if>
+				<if test="organizationId != null">and organization_id=#{organizationId}</if>
+				<if test="userName != null">and user_name like #{userName}</if>
+				<if test="nickName != null">and nick_name like #{nickName}</if>
+				<if test="password != null">and password like #{password}</if>
+				<if test="salt != null">and salt like #{salt}</if>
+				<if test="locked != null">and locked=#{locked}</if>
+				<if test="gender != null">and gender like #{gender}</if>
+				<if test="birthdate != null">and birthdate=#{birthdate}</if>
+				<if test="phone != null">and phone like #{phone}</if>
+				<if test="email != null">and email like #{email}</if>
+				<if test="address != null">and address like #{address}</if>
+				<if test="registerDate != null">and register_date=#{registerDate}</if>
+			</when>
+			<otherwise>
+				<if test="id != null">and id=#{id}</if>
+				<if test="organizationId != null">and organization_id=#{organizationId}</if>
+				<if test="userName != null">and user_name=#{userName}</if>
+				<if test="nickName != null">and nick_name=#{nickName}</if>
+				<if test="password != null">and password=#{password}</if>
+				<if test="salt != null">and salt=#{salt}</if>
+				<if test="locked != null">and locked=#{locked}</if>
+				<if test="gender != null">and gender=#{gender}</if>
+				<if test="birthdate != null">and birthdate=#{birthdate}</if>
+				<if test="phone != null">and phone=#{phone}</if>
+				<if test="email != null">and email=#{email}</if>
+				<if test="address != null">and address=#{address}</if>
+				<if test="registerDate != null">and register_date=#{registerDate}</if>
+			</otherwise>
+			</choose>
+			<if test="betweenAndColumn != null">
+ 				 and ${betweenAndColumn} between ${betweenStart} and ${betweenEnd}
+ 			</if>
+ 		</where>
+		</trim>
+	</sql>
+
+</mapper>

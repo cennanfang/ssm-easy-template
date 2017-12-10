@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.buliyiren.wehelp.mapper.RoleResourceFunMapper">
+
+	<!-- 结果集 -->
+	<resultMap id="roleResourceResult" type="com.buliyiren.wehelp.model.RoleResource">
+		<id property="id" column="id" />
+		<result property="roleId" column="role_id" />
+		<result property="resourceId" column="resource_id" />
+	</resultMap>
+
+	<select id="select" parameterType="Integer" resultMap="roleResourceResult">
+		select * from t_role_resource where id=#{id}
+	</select>
+
+ 	<select id="selectParam" parameterType="java.util.Map" resultMap="roleResourceResult">
+		select * from t_role_resource
+		<include refid="paramWhereCondition"/>
+		<if test="orderColumn != null">
+ 			order by ${orderColumn}
+ 			<if test="orderTurn != null">
+ 				${orderTurn}
+ 			</if>
+ 		</if>
+ 	</select> 
+
+	<insert id="insert" parameterType="com.buliyiren.wehelp.model.RoleResource">
+		insert into t_role_resource(role_id, resource_id)
+			values(#{roleId}, #{resourceId})
+	</insert>
+
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into t_role_resource(role_id, resource_id) values
+		<foreach item="roleResource" collection="list" separator=", ">
+			(#{roleResource.roleId}, #{roleResource.resourceId})
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="com.buliyiren.wehelp.model.RoleResource">
+		update t_role_resource
+		<trim suffixOverrides=",">
+		<set>
+			<if test="roleId != null">role_id=#{roleId},</if>
+			<if test="resourceId != null">resource_id=#{resourceId},</if>
+		</set>
+		</trim>
+		where id=#{id}
+	</update>
+
+	<update id="updateBatch" parameterType="java.util.List">
+		<foreach collection="list" item="roleResource" separator=";">
+		update t_role_resource
+		<trim suffixOverrides=",">
+		<set>
+			<if test="roleResource.roleId != null">role_id=#{roleResource.roleId},</if>
+			<if test="roleResource.resourceId != null">resource_id=#{roleResource.resourceId},</if>
+		</set>
+		</trim>
+		where id=#{roleResource.id}
+		</foreach>
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		delete from t_role_resource where id=#{id}
+	</delete>
+
+	<delete id="deleteParam" parameterType="java.util.Map">
+		delete from t_role_resource
+		<include refid="paramWhereCondition"/>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="java.util.List">
+		delete from t_role_resource where id in 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<foreach collection="list" item="pk" separator=","> 
+ 				#{pk}
+			</foreach>
+		</trim>
+	</delete>
+
+	<select id="count" resultType="int">
+		select count(*) from t_role_resource
+	</select>
+
+	<select id="countParam" parameterType="java.util.Map" resultType="int">
+		select count(*) from t_role_resource
+		<include refid="paramWhereCondition"/>
+	</select>
+
+	<sql id="paramWhereCondition">
+		<trim prefixOverrides="and">
+		<where>	
+			<choose>
+			<when test="stringUseLike != null and stringUseLike == 1">
+				<if test="id != null">and id=#{id}</if>
+				<if test="roleId != null">and role_id=#{roleId}</if>
+				<if test="resourceId != null">and resource_id=#{resourceId}</if>
+			</when>
+			<otherwise>
+				<if test="id != null">and id=#{id}</if>
+				<if test="roleId != null">and role_id=#{roleId}</if>
+				<if test="resourceId != null">and resource_id=#{resourceId}</if>
+			</otherwise>
+			</choose>
+			<if test="betweenAndColumn != null">
+ 				 and ${betweenAndColumn} between ${betweenStart} and ${betweenEnd}
+ 			</if>
+ 		</where>
+		</trim>
+	</sql>
+
+</mapper>

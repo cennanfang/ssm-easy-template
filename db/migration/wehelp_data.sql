@@ -49,60 +49,60 @@ insert into t_role values(1, 'admin', '超级管理员', true);
 insert into t_role values(2, 'user', '普通用户', true);
 insert into t_role values(3, 'reviewer', '审核员', true);
 
-insert into t_role_resource values(1, 1);
-insert into t_role_resource values(1, 12);
-insert into t_role_resource values(1, 13);
-insert into t_role_resource values(1, 14);
-insert into t_role_resource values(1, 15);
-insert into t_role_resource values(1, 21);
-insert into t_role_resource values(1, 22);
-insert into t_role_resource values(1, 23);
-insert into t_role_resource values(1, 24);
-insert into t_role_resource values(1, 25);
-insert into t_role_resource values(1, 31);
-insert into t_role_resource values(1, 32);
-insert into t_role_resource values(1, 33);
-insert into t_role_resource values(1, 34);
-insert into t_role_resource values(1, 35);
-insert into t_role_resource values(1, 41);
-insert into t_role_resource values(1, 32);
-insert into t_role_resource values(1, 43);
-insert into t_role_resource values(1, 44);
-insert into t_role_resource values(1, 45);
+insert into t_role_resource(role_id, resource_id) values(1, 1);
+insert into t_role_resource(role_id, resource_id) values(1, 12);
+insert into t_role_resource(role_id, resource_id) values(1, 13);
+insert into t_role_resource(role_id, resource_id) values(1, 14);
+insert into t_role_resource(role_id, resource_id) values(1, 15);
+insert into t_role_resource(role_id, resource_id) values(1, 21);
+insert into t_role_resource(role_id, resource_id) values(1, 22);
+insert into t_role_resource(role_id, resource_id) values(1, 23);
+insert into t_role_resource(role_id, resource_id) values(1, 24);
+insert into t_role_resource(role_id, resource_id) values(1, 25);
+insert into t_role_resource(role_id, resource_id) values(1, 31);
+insert into t_role_resource(role_id, resource_id) values(1, 32);
+insert into t_role_resource(role_id, resource_id) values(1, 33);
+insert into t_role_resource(role_id, resource_id) values(1, 34);
+insert into t_role_resource(role_id, resource_id) values(1, 35);
+insert into t_role_resource(role_id, resource_id) values(1, 41);
+insert into t_role_resource(role_id, resource_id) values(1, 32);
+insert into t_role_resource(role_id, resource_id) values(1, 43);
+insert into t_role_resource(role_id, resource_id) values(1, 44);
+insert into t_role_resource(role_id, resource_id) values(1, 45);
 
-insert into t_role_resource values(2, 21);
-insert into t_role_resource values(2, 22);
-insert into t_role_resource values(2, 23);
-insert into t_role_resource values(2, 24);
-insert into t_role_resource values(2, 25);
-insert into t_role_resource values(2, 51);
-insert into t_role_resource values(2, 52);
-insert into t_role_resource values(2, 53);
-insert into t_role_resource values(2, 54);
-insert into t_role_resource values(2, 55);
+insert into t_role_resource(role_id, resource_id) values(2, 21);
+insert into t_role_resource(role_id, resource_id) values(2, 22);
+insert into t_role_resource(role_id, resource_id) values(2, 23);
+insert into t_role_resource(role_id, resource_id) values(2, 24);
+insert into t_role_resource(role_id, resource_id) values(2, 25);
+insert into t_role_resource(role_id, resource_id) values(2, 51);
+insert into t_role_resource(role_id, resource_id) values(2, 52);
+insert into t_role_resource(role_id, resource_id) values(2, 53);
+insert into t_role_resource(role_id, resource_id) values(2, 54);
+insert into t_role_resource(role_id, resource_id) values(2, 55);
 
-insert into t_role_resource values(3, 51);
-insert into t_role_resource values(3, 52);
-insert into t_role_resource values(3, 53);
-insert into t_role_resource values(3, 54);
-insert into t_role_resource values(3, 55);
-insert into t_role_resource values(3, 61);
-insert into t_role_resource values(3, 62);
-insert into t_role_resource values(3, 63);
+insert into t_role_resource(role_id, resource_id) values(3, 51);
+insert into t_role_resource(role_id, resource_id) values(3, 52);
+insert into t_role_resource(role_id, resource_id) values(3, 53);
+insert into t_role_resource(role_id, resource_id) values(3, 54);
+insert into t_role_resource(role_id, resource_id) values(3, 55);
+insert into t_role_resource(role_id, resource_id) values(3, 61);
+insert into t_role_resource(role_id, resource_id) values(3, 62);
+insert into t_role_resource(role_id, resource_id) values(3, 63);
 
-insert into t_user(id, username, password, locked, nick_name, sex,  phone, email, address)
+insert into t_user(id, user_name, password, locked, nick_name, gender,  phone, email, address)
 values(1, 'naying', '000000', FALSE , '那英', '女',  '13888888888', 'meigui@qq.com', '华盛顿');
-insert into t_user(id, username, password, locked, nick_name, sex,  phone, email, address)
+insert into t_user(id, user_name, password, locked, nick_name, gender,  phone, email, address)
 values(2, 'wangfeng', '000000', FALSE, '汪峰', '男', '13999999999', 'jiege@qq.com', '伦敦');
-insert into t_user(id, username, password, locked, nick_name, sex,  phone, email, address)
+insert into t_user(id, user_name, password, locked, nick_name, gender,  phone, email, address)
 values(3, 'zhangjie', '000000', FALSE, '张杰', '男', '13333333333', 'zhangsan@qq.com', '北京');
-insert into t_user(id, username, password, locked, nick_name, sex,  phone, email, address)
+insert into t_user(id, user_name, password, locked, nick_name, gender,  phone, email, address)
 values(4, 'huazai', '000000', FALSE, '华仔', '男', '13666666666', 'lisi@qq.com', '香港');
 
-INSERT INTO t_user_role VALUES (1, 3);
-INSERT INTO t_user_role VALUES (2, 2);
-INSERT INTO t_user_role VALUES (3, 2);
-INSERT INTO t_user_role VALUES (4, 1);
+INSERT INTO t_user_role(user_id, role_id) VALUES (1, 3);
+INSERT INTO t_user_role(user_id, role_id) VALUES (2, 2);
+INSERT INTO t_user_role(user_id, role_id) VALUES (3, 2);
+INSERT INTO t_user_role(user_id, role_id) VALUES (4, 1);
 
 insert into t_message_type(name, description, available) values('车出行', '车辆出现信息',TRUE );
 insert into t_message_type(name, description, available) values('人出行', '人出行信息', TRUE);
